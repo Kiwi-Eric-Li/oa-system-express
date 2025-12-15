@@ -2,7 +2,7 @@ const {DataTypes} = require("sequelize");
 const sequelize = require("../dbConnect");
 
 // define data model
-module.exports = sequelize.define("user", {
+module.exports = sequelize.define("users", {
     accountName: {
         type: DataTypes.STRING,
         allowNull: false
@@ -39,7 +39,7 @@ module.exports = sequelize.define("user", {
         type: DataTypes.STRING,
         allowNull: true
     },
-    identify: {
+    identity: {
         type: DataTypes.INTEGER,
         allowNull: true
     },

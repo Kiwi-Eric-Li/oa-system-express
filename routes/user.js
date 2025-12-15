@@ -14,7 +14,7 @@ router.post("/login", async function(req, res, next){
     }
     const result = await loginService(req.body);
     if(result.data !== null){
-        res.setHeader("authentication", result.token);
+        res.setHeader("Authorization", result.token);
     }
     res.send(formatResponse(0, "", result.data));
 })
