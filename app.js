@@ -3,18 +3,26 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require("express-session");
 
 // the .env file in the project root directory is read
 require("dotenv").config()
-
+require("express-async-errors");
 // connect database
 require("./dao/db");
 
 
 
 var userRouter = require('./routes/user');
+var captchaRouter = require('./routes/captcha');
 
 var app = express();
+
+app.use(session({
+  "secret": process.env.SESSION_SECRET,
+  "resave": true,
+  "saveUninitialized": true
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -23,6 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/user', userRouter);
+app.use('/api/captcha', captchaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
