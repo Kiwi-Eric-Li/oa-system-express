@@ -14,7 +14,8 @@ module.exports.loginService = async function(loginInfo){
             "id": loginResult.dataValues.id,
             "userName": loginResult.dataValues.userName,
             "avatar": loginResult.dataValues.avatar,
-            "accountName": loginResult.dataValues.accountName
+            "accountName": loginResult.dataValues.accountName,
+            "identity": loginResult.dataValues.identity
         }
         // generate token
         const token = jwt.sign(data, md5(process.env.JWT_SECRET), {

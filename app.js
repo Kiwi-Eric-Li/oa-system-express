@@ -15,9 +15,9 @@ require("express-async-errors");
 require("./dao/db");
 
 
-
 var userRouter = require('./routes/user');
 var captchaRouter = require('./routes/captcha');
+var routersRouter = require('./routes/router');
 
 var app = express();
 
@@ -62,6 +62,7 @@ app.use(jwt({
 
 app.use('/api/user', userRouter);
 app.use('/api/captcha', captchaRouter);
+app.use("/api/routerlist", routersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
