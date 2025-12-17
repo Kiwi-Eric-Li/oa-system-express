@@ -2,14 +2,17 @@ var express = require("express");
 var router = express.Router();
 
 const {getAllStaffService, getStaffDetailService, createStaffService, updateStaffService, deleteStaffsService} = require("../service/staffService");
+const { formatResponse } = require("../utils/tools");
 
 
 router.get("/", async function (req, res, next){
-    await getAllStaffService();
+    let userList = await getAllStaffService(req.query);
+    res.send(formatResponse(0, "", userList));
 })
 
 router.get("/:id", async function(req, res, next){
-    await getStaffDetailService(req.params.id);
+    let staff = await getStaffDetailService(req.params.id);
+    res.send(formatResponse(0, "", staff));
 })
 
 router.post("/", async function(req, res, next){
