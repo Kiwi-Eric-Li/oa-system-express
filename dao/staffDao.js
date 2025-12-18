@@ -6,7 +6,7 @@ module.exports.getAllStaffDao = async function(params){
     page_size = parseInt(page_size);
     let offset = (page - 1) * page_size;
     let limit = page_size;
-    const result = await userDao.findAll({
+    const result = await userDao.findAndCountAll({
         limit,
         offset,
         order: [["createdAt", "DESC"]],

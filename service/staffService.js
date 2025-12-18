@@ -4,10 +4,16 @@ const {getAllStaffDao, getStaffDetailDao, createStaffDao, updateStaffDao, delete
 
 module.exports.getAllStaffService = async function(params){
     const result = await getAllStaffDao(params);
-    if(result.length > 0){
-        return result;
+    if(result.rows.length > 0){
+        return {
+            count: result.count,
+            data: result.rows
+        };
     }else{
-        return []
+        return {
+            count: 0,
+            data: []
+        }
     }
 }
 

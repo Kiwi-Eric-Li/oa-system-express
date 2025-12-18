@@ -6,8 +6,8 @@ const { formatResponse } = require("../utils/tools");
 
 
 router.get("/", async function (req, res, next){
-    let userList = await getAllStaffService(req.query);
-    res.send(formatResponse(0, "", userList));
+    let userObj = await getAllStaffService(req.query);
+    res.send(formatResponse(0, "", userObj));
 })
 
 router.get("/:id", async function(req, res, next){
