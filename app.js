@@ -19,6 +19,7 @@ var userRouter = require('./routes/user');
 var captchaRouter = require('./routes/captcha');
 var routersRouter = require('./routes/router');
 var staffRouter = require('./routes/staff');
+var departmentRouter = require("./routes/department");
 
 var app = express();
 
@@ -65,6 +66,7 @@ app.use('/api/user', userRouter);
 app.use('/api/captcha', captchaRouter);
 app.use("/api/routerlist", routersRouter);
 app.use("/api/staff", staffRouter);
+app.use("/api/department", departmentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

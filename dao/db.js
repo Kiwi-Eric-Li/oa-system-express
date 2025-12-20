@@ -3,6 +3,7 @@ const md5 = require("md5");
 const sequelize = require("./dbConnect");
 const userModel = require("./model/userModel");
 const routerModel = require("./model/routerModel");
+const departmentModel = require("./model/departmentModel");
 
 // initialize data
 (async function(){
@@ -84,7 +85,60 @@ const routerModel = require("./model/routerModel");
         console.log("The router table has been initialized ...");
     }
 
-
+    let departmentCount = await departmentModel.count();
+    if(!departmentCount){
+        await departmentModel.bulkCreate([
+            {
+                "dptName": "商品部",
+                "remark": "商品部简介",
+                "deptLeader": 1
+            },
+            {
+                "dptName": "大数据商品部",
+                "remark": "大数据商品部简介",
+                "deptLeader": 1
+            },
+            {
+                "dptName": "新研发部",
+                "remark": "新研发部简介",
+                "deptLeader": 1
+            },
+            {
+                "dptName": "销售研发部",
+                "remark": "销售研发部简介",
+                "deptLeader": 1
+            },
+            {
+                "dptName": "技术部",
+                "remark": "技术部简介",
+                "deptLeader": 1
+            },
+            {
+                "dptName": "研发部",
+                "remark": "研发部简介",
+                "deptLeader": 1
+            },
+            {
+                "dptName": "测试部门1",
+                "remark": "测试部门1简介",
+                "parentId": 1,
+                "deptLeader": 2
+            },
+            {
+                "dptName": "测试部门2",
+                "remark": "测试部门2简介",
+                "parentId": 1,
+                "deptLeader": 3
+            },
+            {
+                "dptName": "测试部",
+                "remark": "测试部简介",
+                "parentId": 1,
+                "deptLeader": 4
+            }
+        ]);
+        console.log("The department table has been initialized ...");
+    }
 
     console.log("The database has been initialized ...");
 })();
