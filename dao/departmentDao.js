@@ -13,3 +13,11 @@ module.exports.createDepartmentDao = async function(departmentInfo){
     });
     return dept;
 }
+
+module.exports.updateDepartmentDao = async function(id, type, updateVal){
+    const result = await departmentModel.update(
+      { [type]: updateVal },
+      { where: { id } }
+    );
+    return result;
+}
