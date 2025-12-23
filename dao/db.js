@@ -8,6 +8,13 @@ const departmentModel = require("./model/departmentModel");
 // initialize data
 (async function(){
 
+    // departmentModel.belongsTo(departmentModel, { as: 'parentDept'});
+    departmentModel.belongsTo(departmentModel, {
+        as: 'parentDept',
+        foreignKey: 'parentId',
+        constraints: false
+    });
+
     // synchronize the data model with the table
     await sequelize.sync({
         alter: true
