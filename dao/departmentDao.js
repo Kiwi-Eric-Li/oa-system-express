@@ -32,11 +32,11 @@ module.exports.updateDepartmentDao = async function(id, type, updateVal, isDelet
 }
 
 module.exports.getDepartmentDetailDao = async function(departmentId){
-    const dept = await Department.findOne({
-        where: { departmentId },
+    const dept = await departmentModel.findOne({
+        where: { id: departmentId },
         include: [
             {
-                model: Department,
+                model: departmentModel,
                 as: 'parentDept',
                 attributes: ['id', 'dptName']
             }
