@@ -14,10 +14,33 @@ module.exports.createDepartmentDao = async function(departmentInfo){
     return dept;
 }
 
-module.exports.updateDepartmentDao = async function(id, type, updateVal){
-    const result = await departmentModel.update(
-      { [type]: updateVal },
-      { where: { id } }
-    );
-    return result;
+module.exports.updateDepartmentDao = async function(id, type, updateVal, isDelete){
+    if(isDelete){
+        const result = await departmentModel.update(
+            { parentId: null },
+            { where: { id } }
+        );
+        return result;
+    }else{
+        const result = await departmentModel.update(
+            { [type]: updateVal },
+            { where: { id } }
+        );
+        return result;
+    }
+    
+}
+
+module.exports.getDepartmentDetailDao = async function(departmentId){
+    const dept = await Department.findOne({
+        where: { departmentId },
+        include: [
+            {
+                model: Department,
+                as: 'parentDept',
+                attributes: ['id', 'dptName']
+            }
+        ]
+    });
+    return dept;
 }
