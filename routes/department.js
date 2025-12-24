@@ -14,7 +14,7 @@ router.post("/", async function(req, res, next){
     res.send(formatResponse(0, "", result));
 })
 
-router.put("/", async function(req, res, next){
+router.put("/:id", async function(req, res, next){
     const result = await updateDepartmentService(req.params.id, req.body.type, req.body.updateVal, req.body.isDelete);
     res.send(formatResponse(0, "", result));
 })
