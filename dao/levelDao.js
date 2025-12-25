@@ -13,7 +13,10 @@ module.exports.updateLevelDao = async function(id, type, updateVal){
 }
 
 module.exports.deleteLevelDao = async function(id){
-
+    const result = await levelModel.destroy({
+        where: {id}
+    });
+    return result;
 }
 
 module.exports.getLevelByIdDao = async function(id){
