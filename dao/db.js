@@ -4,6 +4,7 @@ const sequelize = require("./dbConnect");
 const userModel = require("./model/userModel");
 const routerModel = require("./model/routerModel");
 const departmentModel = require("./model/departmentModel");
+const levelModel = require("./model/levelModel");
 
 // initialize data
 (async function(){
@@ -145,6 +146,37 @@ const departmentModel = require("./model/departmentModel");
             }
         ]);
         console.log("The department table has been initialized ...");
+    }
+
+    let levelCount = await levelModel.count();
+    if(!levelCount){
+        await levelModel.bulkCreate([
+            {
+                "assessmentRequire": "1A",
+                "baseNumber": 60,
+                "interviewRequire": "3A",
+                "levelDescription": "学徒",
+                "levelName": "T1-4",
+                "levelScore": 90.0
+            },
+            {
+                "assessmentRequire": "1A",
+                "baseNumber": 20,
+                "interviewRequire": "2A",
+                "levelDescription": "初级专员",
+                "levelName": "T2-3",
+                "levelScore": 60.0
+            },
+            {
+                "assessmentRequire": "2S",
+                "baseNumber": 160,
+                "interviewRequire": "2S2A",
+                "levelDescription": "资深专家",
+                "levelName": "T6-1",
+                "levelScore": 70.0
+            }
+        ]);
+        console.log("The level table has been initialized ...")
     }
 
     console.log("The database has been initialized ...");
