@@ -1,12 +1,13 @@
 var express = require("express");
 var router = express.Router();
 
-const {getLevelByIdService, deleteLevelService} = require("../service/levelService");
+const {getLevelListService, getLevelByIdService, deleteLevelService} = require("../service/levelService");
 const {formatResponse} = require("../utils/tools");
 
 
 router.get("/", async function(req, res, next){
-
+    let levelObj = await getLevelListService(req.query);
+    res.send(formatResponse(0, "", levelObj));
 })
 
 
