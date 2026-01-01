@@ -16,6 +16,25 @@ const levelModel = require("./model/levelModel");
         constraints: false
     });
 
+    userModel.belongsTo(departmentModel, {
+        foreignKey: 'department',
+        targetKey: 'id',
+        as: 'dept'
+    });
+
+    userModel.belongsTo(levelModel, {
+        foreignKey: 'level',
+        targetKey: 'id',
+        as: 'levelInfo'
+    });
+
+    departmentModel.belongsTo(userModel, {
+        foreignKey: 'deptLeader',
+        targetKey: 'id',
+        as: 'leader'
+    });
+
+
     // synchronize the data model with the table
     await sequelize.sync({
         alter: true

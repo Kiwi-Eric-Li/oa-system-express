@@ -1,14 +1,36 @@
-var userDao = require("./model/userModel");
+var userModel = require("./model/userModel");
+var departmentModel = require("./model/departmentModel");
+var levelModel = require("./model/levelModel");
 
 module.exports.getAllStaffDao = async function(params){
     let {page, page_size} = params;
     page = parseInt(page);
     page_size = parseInt(page_size);
+
     let offset = (page - 1) * page_size;
     let limit = page_size;
-    const result = await userDao.findAndCountAll({
+    const result = await userModel.findAndCountAll({
         limit,
         offset,
+        include: [
+            {
+                model: departmentModel,
+                as: 'dept',
+                attributes: ['id', 'dptName'],
+                include: [
+                    {
+                        model: userModel,
+                        as: 'leader',
+                        attributes: ["id", "userName"]
+                    }
+                ]
+            },
+            {
+                model: levelModel,
+                as: 'levelInfo',
+                attributes: ['id', 'levelName']
+            }
+        ],
         order: [["createdAt", "DESC"]],
         attributes: {
             exclude: ['loginPwd']
@@ -18,7 +40,7 @@ module.exports.getAllStaffDao = async function(params){
 }
 
 module.exports.getStaffDetailDao = async function(id){
-    const result = await userDao.findOne({
+    const result = await userModel.findOne({
         where: { id },
         attributes: {
             exclude: ['loginPwd']

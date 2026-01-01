@@ -4,6 +4,10 @@ var router = express.Router();
 const {getAllStaffService, getStaffDetailService, createStaffService, updateStaffService, deleteStaffsService} = require("../service/staffService");
 const { formatResponse } = require("../utils/tools");
 
+router.post("/all", async function(req, res, next){
+    let userObj = await getAllStaffService(req.body);
+    res.send(formatResponse(0, "", userObj));
+});
 
 router.get("/", async function (req, res, next){
     let userObj = await getAllStaffService(req.query);
