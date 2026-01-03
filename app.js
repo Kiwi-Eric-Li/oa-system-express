@@ -20,12 +20,13 @@ var captchaRouter = require('./routes/captcha');
 var routersRouter = require('./routes/router');
 var staffRouter = require('./routes/staff');
 var departmentRouter = require("./routes/department");
-var levelRouter = require("./routes/level")
+var levelRouter = require("./routes/level");
+var assessmentRouter = require("./routes/assessment");
 
 var app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3002', // 允许的前端地址
+  origin: 'http://localhost:3001', // 允许的前端地址
   credentials: true,               // 如果要携带 cookie
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -69,6 +70,7 @@ app.use("/api/routerlist", routersRouter);
 app.use("/api/staff", staffRouter);
 app.use("/api/department", departmentRouter);
 app.use("/api/level", levelRouter);
+app.use("/api/assessment", assessmentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
