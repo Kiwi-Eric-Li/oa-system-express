@@ -1,4 +1,5 @@
 var assessmentModel = require("./model/assessmentModel");
+var userModel = require("./model/userModel");
 var levelModel = require("./model/levelModel");
 
 module.exports.getAssessmentListByIdDao = async function(staffId){
@@ -7,9 +8,19 @@ module.exports.getAssessmentListByIdDao = async function(staffId){
       where: { "userId": staffId },
       include: [
         {
+            model: userModel,
+            as: 'user',
+            attributes: ["id", 'userName']
+        },
+        {
           model: levelModel,
-          as: 'level',
+          as: 'initialLevelInfo',
           attributes: ['id', 'levelName']
+        },
+        {
+            model: levelModel,
+            as: 'currentLevelInfo',
+            attributes: ['id', 'levelName']
         }
       ],
       order: [['createdAt', 'DESC']]

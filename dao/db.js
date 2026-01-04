@@ -45,13 +45,13 @@ const assessmentModel = require("./model/assessmentModel");
     });
 
     assessmentModel.belongsTo(levelModel, {
-        foreignKey: 'currentLevel',
-        as: 'level'
+        foreignKey: 'initialLevel',
+        as: 'initialLevelInfo'
     });
 
-    levelModel.hasMany(assessmentModel, {
+    assessmentModel.belongsTo(levelModel, {
         foreignKey: 'currentLevel',
-        as: 'assessments'
+        as: 'currentLevelInfo'
     });
 
 
