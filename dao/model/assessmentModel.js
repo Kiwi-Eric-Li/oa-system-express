@@ -6,6 +6,22 @@ module.exports = sequelize.define("assessments", {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    initialLevel: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    currentLevel: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    levelScore: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    assessScore: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     result: {
         type: DataTypes.STRING,
         allowNull: false

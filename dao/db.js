@@ -5,11 +5,11 @@ const userModel = require("./model/userModel");
 const routerModel = require("./model/routerModel");
 const departmentModel = require("./model/departmentModel");
 const levelModel = require("./model/levelModel");
+const assessmentModel = require("./model/assessmentModel");
 
 // initialize data
 (async function(){
 
-    // departmentModel.belongsTo(departmentModel, { as: 'parentDept'});
     departmentModel.belongsTo(departmentModel, {
         as: 'parentDept',
         foreignKey: 'parentId',
@@ -32,6 +32,26 @@ const levelModel = require("./model/levelModel");
         foreignKey: 'deptLeader',
         targetKey: 'id',
         as: 'leader'
+    });
+
+    userModel.hasMany(assessmentModel, {
+        foreignKey: 'userId',
+        as: 'assessments'
+    });
+
+    assessmentModel.belongsTo(userModel, {
+        foreignKey: 'userId',
+        as: 'user'
+    });
+
+    assessmentModel.belongsTo(levelModel, {
+        foreignKey: 'currentLevel',
+        as: 'level'
+    });
+
+    levelModel.hasMany(assessmentModel, {
+        foreignKey: 'currentLevel',
+        as: 'assessments'
     });
 
 
@@ -196,6 +216,31 @@ const levelModel = require("./model/levelModel");
             }
         ]);
         console.log("The level table has been initialized ...")
+    }
+
+    let assessmentCount = await assessmentModel.count();
+    if(!assessmentCount){
+        await assessmentModel.bulkCreate([
+            {
+                userId: 4,
+                initialLevel: 2,
+                currentLevel: 2,
+                levelScore: 50,
+                assessScore: 50,
+                result: 'B',
+                assessDate: new Date()
+            },
+            {
+                userId: 2,
+                initialLevel: 3,
+                currentLevel: 3,
+                levelScore: 60,
+                assessScore: 60,
+                result: 'B+',
+                assessDate: new Date()
+            }
+        ]);
+        console.log("The assessment table has been initialized ...")
     }
 
     console.log("The database has been initialized ...");
