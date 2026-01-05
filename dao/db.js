@@ -6,6 +6,7 @@ const routerModel = require("./model/routerModel");
 const departmentModel = require("./model/departmentModel");
 const levelModel = require("./model/levelModel");
 const assessmentModel = require("./model/assessmentModel");
+const rewardandpunishmentModel = require("./model/rewardandpunishmentModel");
 
 // initialize data
 (async function(){
@@ -54,6 +55,10 @@ const assessmentModel = require("./model/assessmentModel");
         as: 'currentLevelInfo'
     });
 
+    userModel.hasMany(rewardandpunishmentModel, {
+        foreignKey: 'userId',
+        as: 'user'
+    })
 
     // synchronize the data model with the table
     await sequelize.sync({
@@ -242,6 +247,50 @@ const assessmentModel = require("./model/assessmentModel");
         ]);
         console.log("The assessment table has been initialized ...")
     }
+
+    let rewardandpunishmentCount = await rewardandpunishmentModel.count();
+    if(!rewardandpunishmentCount){
+        await rewardandpunishmentModel.bulkCreate([
+            {
+                userId: 4,
+                type: 1,
+                reason: "表现优异",
+                date: new Date()
+            },
+            {
+                userId: 4,
+                type: 2,
+                reason: "奖励知识创新",
+                date: new Date()
+            },
+            {
+                userId: 4,
+                type: 3,
+                reason: "迟到",
+                date: new Date()
+            },
+            {
+                userId: 4,
+                type: 3,
+                reason: "早退",
+                date: new Date()
+            },
+            {
+                userId: 4,
+                type: 4,
+                reason: "搬弄是非",
+                date: new Date()
+            },
+            {
+                userId: 4,
+                type: 4,
+                reason: "工作失误",
+                date: new Date()
+            },
+        ]);
+        console.log("The rewardandpunishment table has been initialized ...")
+    }
+
 
     console.log("The database has been initialized ...");
 })();
