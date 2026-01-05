@@ -1,11 +1,11 @@
 const {getAssessmentListByIdDao} = require('../dao/assessmentDao')
 
-module.exports.getAssessmentListByUserIdService = async function(staffId){
-    const result = await getAssessmentListByIdDao(staffId);
-    if(result.length > 0){
+module.exports.getAssessmentListByUserIdService = async function(staff_id, page, page_size){
+    const result = await getAssessmentListByIdDao(staff_id, page, page_size);
+    if(result.rows.length){
         return {
-            count: result.length,
-            data: result
+            count: result.count,
+            data: result.rows
         }
     }else{
         return {
