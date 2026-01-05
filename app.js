@@ -22,6 +22,7 @@ var staffRouter = require('./routes/staff');
 var departmentRouter = require("./routes/department");
 var levelRouter = require("./routes/level");
 var assessmentRouter = require("./routes/assessment");
+var rewardandpunishmentRouter = require("./routes/rewardandpunishment");
 
 var app = express();
 
@@ -71,6 +72,7 @@ app.use("/api/staff", staffRouter);
 app.use("/api/department", departmentRouter);
 app.use("/api/level", levelRouter);
 app.use("/api/assessment", assessmentRouter);
+app.use("/api/rewardandpunish", rewardandpunishmentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

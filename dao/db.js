@@ -55,10 +55,10 @@ const rewardandpunishmentModel = require("./model/rewardandpunishmentModel");
         as: 'currentLevelInfo'
     });
 
-    userModel.hasMany(rewardandpunishmentModel, {
+    rewardandpunishmentModel.belongsTo(userModel, {
         foreignKey: 'userId',
         as: 'user'
-    })
+    });
 
     // synchronize the data model with the table
     await sequelize.sync({
