@@ -31,5 +31,9 @@ router.post("/", async function(req, res, next){
     await deleteStaffsService(req.body.ids);
 })
 
+router.post("/checkphone", async function(req, res, next){
+    const {phone} = req.body;
+    
+})
 
 module.exports = router
