@@ -30,7 +30,7 @@ module.exports.updateStaffService = async function(id, staffInfo){
 }
 
 module.exports.deleteStaffsService = async function(ids){
-    await deleteStaffsDao(ids);
+    return await deleteStaffsDao(ids);
 }
 
 

@@ -58,7 +58,12 @@ module.exports.updateStaffDao = async function(id, staffInfo){
 }
 
 module.exports.deleteStaffsDao = async function(ids){
-
+    const result = await userModel.destroy({
+      where: {
+        id: ids
+      }
+    });
+    return result;
 }
 
 

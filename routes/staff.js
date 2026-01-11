@@ -27,13 +27,15 @@ router.put("/", async function(req, res, next){
     await updateStaffService(req.body.staffId, req.body.staff);
 })
 
-router.post("/", async function(req, res, next){
-    await deleteStaffsService(req.body.ids);
+router.post("/deletestaff", async function(req, res, next){
+    const { ids } = req.body;
+    let result = await deleteStaffsService(ids);
+    res.send(formatResponse(0, "", result));
 })
 
 router.post("/checkphone", async function(req, res, next){
     const {phone} = req.body;
-    
+
 })
 
 module.exports = router
