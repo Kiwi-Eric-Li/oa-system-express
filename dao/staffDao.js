@@ -66,5 +66,15 @@ module.exports.deleteStaffsDao = async function(ids){
     return result;
 }
 
+module.exports.checkIsExistDao = async function(val){
+    const { accountName, mobile } = val;
+
+    const where = accountName ? { accountName } : { mobile };
+    const result = await userModel.findOne({
+      where,
+      attributes: ['id'],
+    });
+    return result;
+}
 
 

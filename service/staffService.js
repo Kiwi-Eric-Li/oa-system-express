@@ -1,6 +1,6 @@
 
 
-const {getAllStaffDao, getStaffDetailDao, createStaffDao, updateStaffDao, deleteStaffsDao} = require("../dao/staffDao");
+const {getAllStaffDao, getStaffDetailDao, createStaffDao, updateStaffDao, deleteStaffsDao, checkIsExistDao} = require("../dao/staffDao");
 
 module.exports.getAllStaffService = async function(params){
     const result = await getAllStaffDao(params);
@@ -33,4 +33,6 @@ module.exports.deleteStaffsService = async function(ids){
     return await deleteStaffsDao(ids);
 }
 
-
+module.exports.checkIsExistService = async function(val){
+    return await checkIsExistDao(val);
+}

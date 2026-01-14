@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const {getAllStaffService, getStaffDetailService, createStaffService, updateStaffService, deleteStaffsService} = require("../service/staffService");
+const {getAllStaffService, getStaffDetailService, createStaffService, updateStaffService, deleteStaffsService, checkIsExistService} = require("../service/staffService");
 const { formatResponse } = require("../utils/tools");
 
 router.post("/all", async function(req, res, next){
@@ -33,9 +33,9 @@ router.post("/deletestaff", async function(req, res, next){
     res.send(formatResponse(0, "", result));
 })
 
-router.post("/checkphone", async function(req, res, next){
-    const {phone} = req.body;
-
+router.post("/checkisexist", async function(req, res, next){
+    let result = await checkIsExistService(req.body);
+    res.send(formatResponse(0, "", result));
 })
 
 module.exports = router
