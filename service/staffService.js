@@ -26,7 +26,7 @@ module.exports.createStaffService = async function(staffInfo){
 }
 
 module.exports.updateStaffService = async function(id, staffInfo){
-    await updateStaffDao(id, staffInfo);
+    return await updateStaffDao(id, staffInfo);
 }
 
 module.exports.deleteStaffsService = async function(ids){

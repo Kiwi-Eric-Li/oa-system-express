@@ -24,7 +24,8 @@ router.post("/", async function(req, res, next){
 })
 
 router.put("/", async function(req, res, next){
-    await updateStaffService(req.body.staffId, req.body.staff);
+    let result = await updateStaffService(req.body.staffId, req.body.staffData);
+    res.send(formatResponse(0, "", result));
 })
 
 router.post("/deletestaff", async function(req, res, next){

@@ -54,7 +54,13 @@ module.exports.createStaffDao = async function(staffInfo){
 }
 
 module.exports.updateStaffDao = async function(id, staffInfo){
+    const staff = await userModel.findByPk(id);
 
+    if (!staff) {
+        return staff;
+    }
+    await staff.update(staffInfo);
+    return staff;
 }
 
 module.exports.deleteStaffsDao = async function(ids){
