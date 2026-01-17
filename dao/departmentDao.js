@@ -6,28 +6,26 @@ module.exports.getAllDepartmentsDao = async function(){
     return await departmentModel.findAll();
 }
 
-module.exports.getDepartmentListDao = async function(content = '', page = 1, pageSize = 5){
+module.exports.getDepartmentListDao = async function(content = '', page = 1, page_size = 5){
     const whereCondition = {}
 
     // 如果传了部门名（非空字符串），才加查询条件
     if (content && content.trim() !== '') {
-        whereCondition.dptName = {
-            [Op.like]: `%${content}%`
-        }
+        whereCondition.dptName = content.trim()
     }
 
     const result = await departmentModel.findAndCountAll({
         where: whereCondition,
         order: [['createdAt', 'DESC']],
-        limit: Number(pageSize),
-        offset: (Number(page) - 1) * Number(pageSize)
+        limit: Number(page_size),
+        offset: (Number(page) - 1) * Number(page_size)
     })
 
     return {
         list: result.rows,
         total: result.count,
         page: Number(page),
-        pageSize: Number(pageSize)
+        pageSize: Number(page_size)
     }
 
 }

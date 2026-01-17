@@ -12,8 +12,8 @@ module.exports.getAllDepartmentsService = async function(){
     return result;
 }
 
-module.exports.getDepartmentListService = async function(content, page, pageSize){
-    const result = await getDepartmentListDao(content, page, pageSize);
+module.exports.getDepartmentListService = async function(content, page, page_size){
+    const result = await getDepartmentListDao(content, page, page_size);
     return result;
 }
 

@@ -10,8 +10,8 @@ router.get("/", async function(req, res, next){
 })
 
 router.post("/list", async function(req, res, next){
-    const { content, page, pageSize } = req.body;
-    const result = await getDepartmentListService(content, page, pageSize);
+    const { content, page, page_size } = req.body;
+    const result = await getDepartmentListService(content, page, page_size);
     res.send(formatResponse(0, "", result));
 })
 
