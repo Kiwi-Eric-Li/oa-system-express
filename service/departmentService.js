@@ -1,4 +1,4 @@
-const {getAllDepartmentsDao, createDepartmentDao, updateDepartmentDao, getDepartmentDetailDao} = require("../dao/departmentDao");
+const {getAllDepartmentsDao, getDepartmentListDao, createDepartmentDao, updateDepartmentDao, getDepartmentDetailDao} = require("../dao/departmentDao");
 const {buildDeptTree} = require("../utils/tools");
 
 module.exports.getAllDepartmentsService = async function(){
@@ -11,6 +11,12 @@ module.exports.getAllDepartmentsService = async function(){
     };
     return result;
 }
+
+module.exports.getDepartmentListService = async function(content, page, pageSize){
+    const result = await getDepartmentListDao(content, page, pageSize);
+    return result;
+}
+
 
 module.exports.createDepartmentService = async function(departmentInfo){
     const result = await createDepartmentDao(departmentInfo);

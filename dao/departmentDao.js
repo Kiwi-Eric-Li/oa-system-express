@@ -1,8 +1,37 @@
+const { Op } = require('sequelize');
+
 var departmentModel = require("./model/departmentModel");
 
 module.exports.getAllDepartmentsDao = async function(){
     return await departmentModel.findAll();
 }
+
+module.exports.getDepartmentListDao = async function(content = '', page = 1, pageSize = 5){
+    const whereCondition = {}
+
+    // 如果传了部门名（非空字符串），才加查询条件
+    if (content && content.trim() !== '') {
+        whereCondition.dptName = {
+            [Op.like]: `%${content}%`
+        }
+    }
+
+    const result = await departmentModel.findAndCountAll({
+        where: whereCondition,
+        order: [['createdAt', 'DESC']],
+        limit: Number(pageSize),
+        offset: (Number(page) - 1) * Number(pageSize)
+    })
+
+    return {
+        list: result.rows,
+        total: result.count,
+        page: Number(page),
+        pageSize: Number(pageSize)
+    }
+
+}
+
 
 module.exports.createDepartmentDao = async function(departmentInfo){
     const dept = await departmentModel.create({
