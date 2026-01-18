@@ -45,6 +45,13 @@ module.exports.getStaffDetailDao = async function(id){
         attributes: {
             exclude: ['loginPwd']
         },
+        include: [
+            {
+                model: departmentModel,
+                as: 'dept',
+                attributes: ['dptName'] // 只返回部门名称
+            }
+        ]
     });
     return result;
 }
