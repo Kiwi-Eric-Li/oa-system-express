@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-var {loginService} = require("../service/userService");
+var {loginService, getUploadTokenService} = require("../service/userService");
 const {formatResponse} = require("../utils/tools");
 
 router.post("/login", async function(req, res, next){
@@ -19,6 +19,11 @@ router.post("/login", async function(req, res, next){
     res.send(formatResponse(0, "", result.data));
 })
 
+router.post("/upload/token", async function(req, res, next){
+    const { bucket, uploadUrl, accessKey, secretKey } = req.body;
+    const result = await getUploadTokenService(bucket, uploadUrl, accessKey, secretKey);
+    res.send(formatResponse(0, "", result.data));
+});
 
 
 module.exports = router;

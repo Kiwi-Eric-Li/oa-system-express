@@ -50,6 +50,11 @@ module.exports.getStaffDetailDao = async function(id){
                 model: departmentModel,
                 as: 'dept',
                 attributes: ['dptName'] // 只返回部门名称
+            },
+            {
+                model: levelModel,
+                as: 'levelInfo',
+                attributes: ['levelName'] // 只返回级别名称
             }
         ]
     });
