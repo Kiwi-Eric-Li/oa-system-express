@@ -29,6 +29,30 @@ module.exports.getLevelListDao = async function(params){
     return result;
 }
 
+module.exports.getAllLevelListDao = async function(content='', page=1, page_size=5){
+    const whereCondition = {}
+    
+    // 如果传了部门名（非空字符串），才加查询条件
+    if (content && content.trim() !== '') {
+        whereCondition.levelName = content.trim()
+    }
+
+    const result = await levelModel.findAndCountAll({
+        where: whereCondition,
+        order: [['createdAt', 'DESC']],
+        limit: Number(page_size),
+        offset: (Number(page) - 1) * Number(page_size)
+    })
+
+    return {
+        list: result.rows,
+        total: result.count,
+        page: Number(page),
+        pageSize: Number(page_size)
+    }
+}
+
+
 module.exports.createLevelDao = async function(levelInfo){
 
 }

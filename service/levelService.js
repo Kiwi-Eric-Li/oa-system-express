@@ -1,4 +1,4 @@
-const {getLevelListDao, createLevelDao, updateLevelDao, deleteLevelDao, getLevelByIdDao} = require("../dao/levelDao");
+const {getLevelListDao, getAllLevelListDao, createLevelDao, updateLevelDao, deleteLevelDao, getLevelByIdDao} = require("../dao/levelDao");
 
 
 
@@ -15,6 +15,11 @@ module.exports.getLevelListService = async function(params){
             data: []
         }
     }
+}
+
+module.exports.getAllLevelListService = async function(content, page, page_size){
+    const result = await getAllLevelListDao(content, page, page_size);
+    return result;
 }
 
 
