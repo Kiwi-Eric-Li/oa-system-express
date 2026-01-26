@@ -23,6 +23,7 @@ var departmentRouter = require("./routes/department");
 var levelRouter = require("./routes/level");
 var assessmentRouter = require("./routes/assessment");
 var rewardandpunishmentRouter = require("./routes/rewardandpunishment");
+var uploadRouter = require("./routes/upload");
 
 var app = express();
 
@@ -50,6 +51,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/img', express.static(path.join(__dirname, 'img')));
 
 // validate token interface
 app.use(jwt({
@@ -73,6 +75,7 @@ app.use("/api/department", departmentRouter);
 app.use("/api/level", levelRouter);
 app.use("/api/assessment", assessmentRouter);
 app.use("/api/rewardandpunish", rewardandpunishmentRouter);
+app.use("/api/img", uploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
